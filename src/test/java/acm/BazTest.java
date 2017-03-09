@@ -34,13 +34,24 @@ public class BazTest {
 
     @Test
     public void testObjects() {
-        Object[] x = {1234, "HELLO WORLD", new AbstractInterruptibleChannel() {
+        Object[] x = {1234, MyClassClassFactoryFactorySingleton.getInstance(), new AbstractInterruptibleChannel() {
             @Override
             protected void implCloseChannel() throws IOException {
                 throw new IOException("You're doing it wrong!");
             }
-        }, new BazTest()};
-        assertEquals(4, myClassClass.baz(x));
+        }, MyClassClassFactoryFactorySingleton.getInstance()};
+        assertEquals(3, myClassClass.baz(x));
+    }
+
+    @Test
+    public void testMyClassClassFactoryFactorySingleton() {
+        MyClassClassFactoryFactorySingleton[] x = {
+                MyClassClassFactoryFactorySingleton.getInstance(),
+                MyClassClassFactoryFactorySingleton.getInstance(),
+                MyClassClassFactoryFactorySingleton.getInstance()
+        };
+
+        assertEquals(1, myClassClass.baz(x));
     }
 
     @Test
